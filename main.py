@@ -55,3 +55,10 @@ for i in range(5):
 # [m, n)
 for i in range(5, 10):    
     print(i) 
+
+#you can use a for loop to iterate in decreasing order
+    
+#for. start at i=50, decrement i by 5 while i > 10
+# the range [50, 5)
+for i in range(50, 10, -5):    
+    print(i)
