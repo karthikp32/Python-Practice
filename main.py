@@ -212,6 +212,47 @@ arr4.sort(key=lambda name: len(name), reverse=True)
 print(arr4)
 
 
+#List comprehension
+arr5 = ["karthik" * i for i in range(5)]
+print(arr5)
+
+#You can use list comprehension to create 2D lists
+#for ex. creating a 10x10 2D array with all zeroes
+arr6 = [[0] * 10 for i in range(10)]
+print(arr6)
 
 
+#Creating 2D lists this way can create 4 of the same rows instead of 4 unique rows in the larger list
+# so if you modify one value in one row, it will modify that same value in all of the other rows
+arr7 = [[0] * 4] * 4
+arr7[0][3] = 17
+print(arr7)
+
+#You can slice, print, etc. strings similar to arrays
+s1 = "karthik"
+print(s1[2:4])
+
+#A specific character in a string can't be changed since strings are immutable
+s2 = "swathi"
+# s2[0] = "k"
+
+#You can concatenate a new string to original string since this will create a whole new string
+#Considered O(n) time operation since you're creating a whole new string
+s2 += "abhi"
+print(s2)
+
+#Integers can be converted to strings
+print(str(23) + str(23))
+
+#String can be converted to integers
+print(int("23") + int("23"))
         
+#You can get ASCII value using ord() function
+print(ord("A"))       
+print(ord("a"))       
+
+#You can combine strings using join() function and a delimiter
+strings = ["karthik", "swathi", "abhi", "akhil"]
+print("/".join(strings))
+
+
