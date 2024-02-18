@@ -34,6 +34,13 @@ class GoFish:
     #string ask_responding_player_to_say_number_of_cards_or_go_fish(String name)
     #update_players_cards(int askPlayerNum, int respondingPlayerNum)
     #randomly_deal_card_to_player(int playerNum)
+    num_of_players = 0
+    POSSIBLE_NUMBER_OF_BOOKS = 13
+    current_number_of_books_total = 0
+    number_books_of_each_player = []
+    cards_in_pool = []
+    players = []
+
 
     class Player:
         number = 0
@@ -46,9 +53,14 @@ class GoFish:
             self.cards = cards
 
 
+    def get_num_of_players(self):
+        return input("Welcome to Go Fish! How many players will be playing? ")        
+
     def startGame(self):
-        self.Player = self.Player(1, "Karthik", [])
-        print(self.Player.name)
+        num_of_players = self.get_num_of_players();
+        print(num_of_players)
+        # self.Player = self.Player(1, "Karthik", [])
+
 
 if __name__== '__main__':
     goFish = GoFish()
