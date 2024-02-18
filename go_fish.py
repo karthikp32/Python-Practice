@@ -56,9 +56,16 @@ class GoFish:
     def get_num_of_players(self):
         return input("Welcome to Go Fish! How many players will be playing? ")        
 
+    def ask_players_for_their_name(self, num_of_players):
+        for i in range(1, int(num_of_players) + 1):
+            player_name = input("What is your name player " + str(i) + " ")
+            self.players.append(self.Player(i, player_name, [])) 
+            print("Welcome " + self.players[i-1].name) 
+
     def startGame(self):
         num_of_players = self.get_num_of_players();
         print(num_of_players)
+        self.ask_players_for_their_name(num_of_players)
         # self.Player = self.Player(1, "Karthik", [])
 
 
