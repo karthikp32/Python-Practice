@@ -86,33 +86,39 @@ class Solution:
 
         return adjList
 
-    def hasCycle(self, adjList, start):
-        visited = set()          # Set to keep track of visited vertices
-        stack = [start]          # Stack for DFS traversal
-        while stack:
-            vertex = stack.pop() # Pop a vertex from the stack
-            if vertex not in visited:
-                print(vertex)    # Process the vertex (e.g., print it)
-                visited.add(vertex)
-                    # Push adjacent vertices onto the stack
-                for neighbor in reversed(adjList[vertex]):
-                    if neighbor not in visited:
-                        stack.append(neighbor)
-            else:
-                return True
-        return False        
+       
 
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        if numCourses > 0:
-            adjList = self.buildGraph(numCourses, prerequisites)
-            print(adjList)
-            return not self.hasCycle(adjList, prerequisites[0][1])
+        adjList = self.buildGraph(numCourses, prerequisites)
+        visited = set()
+
+        def hasCycle(node, stack):
+            if node in visited:
+                if node in stack:
+                    return True
+                return False
+            
+            visited.add(node)
+
+            stack.append(node)
+
+            for neighbor in adjList[node]:
+                if hasCycle(neighbor, stack):
+                    return True
+                
+            stack.pop()
+            return False
+
+        for node in range(numCourses):
+            if hasCycle(node, []):
+                return False
+            
         return True
     
     def main(self):
-        # expected1 = True 
-        # actual1 = self.canFinish(2, [[1,0]])
-        # assert expected1 == actual1, "failed test case 1"
+        expected1 = True 
+        actual1 = self.canFinish(2, [[1,0]])
+        assert expected1 == actual1, "failed test case 1"
 
         expected1 = False 
         actual1 = self.canFinish(2, [[1,0], [0,1]])
