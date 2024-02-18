@@ -470,7 +470,7 @@ square(["blue", "red", "green"], ["purple", "orange", "brown"])
 #Class
 class ColorClass:
     #Constructor initialized with __init__
-    #self is similar to this keyword in other programming languages
+    #self is similar to "this" keyword in other programming languages
     #and passed onto every function in Python
     def __init__(self, paint_brush):
         #You can use self keyword and dot notation to create member variables
