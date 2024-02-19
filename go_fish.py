@@ -96,11 +96,60 @@ class GoFish:
             print(player.name + " here are your cards: " + ','.join(player.cards))
 
 
+    def start_players_turn(self, name):
+        playerIdx = self.get_players_index_by_name_from_list_of_players(name)
+        responding_player = self.ask_player_who_they_want_to_ask_for_a_card(name)
+        rank = self.ask_player_what_card_they_want_to_ask_for(name)
+        response = self.ask_responding_player_to_say_number_of_cards_or_go_fish(responding_player, rank)
+        if response == "go fish":
+            randomCardIdx = self.get_index_of_random_card()
+            randomCard = self.cards_in_pool[randomCardIdx]
+            self.players[playerIdx].cards.append(randomCard)
+            self.cards_in_pool.pop(randomCardIdx)
+        else:
+            responding_player_idx = self.get_players_index_by_name_from_list_of_players(responding_player)
+            cards_of_rank = self.get_all_cards_of_rank_from_players_cards(responding_player_idx, rank)
+            for card in cards_of_rank:
+                self.players[playerIdx].cards.append(card)
+                self.players[int(responding_player_idx)].cards.remove(card)    
+            print(self.players[playerIdx].name + " cards are " + ",".join(self.players[playerIdx].cards))
+            print(self.players[responding_player_idx].name + " cards are " + ",".join(self.players[responding_player_idx].cards))       
+
+    def get_players_index_by_name_from_list_of_players(self, name):
+        for i in range(len(self.players)):
+            if self.players[i].name == name:
+                return i
+        return -1    
+            
+    def get_all_cards_of_rank_from_players_cards(self, playerIdx, rank):
+        cardsOfRank = []        
+        for card in self.players[playerIdx].cards:
+            if rank in card:
+                cardsOfRank.append(card)
+        return cardsOfRank
+
+    def ask_player_who_they_want_to_ask_for_a_card(self, name):
+        responding_player = input(name + ", what player do you want to ask for a card?")
+        return responding_player
+
+    def ask_player_what_card_they_want_to_ask_for(self, name):
+        rank = input(name + ", what rank do you want to ask for? ")  
+        return rank  
+
+    def ask_responding_player_to_say_number_of_cards_or_go_fish(self, name, card):
+        response = input(name + " please say how many cards of rank " + card + " you have or say go fish ") 
+        return response   
+    
+    def iterate_through_everyones_turn(self):
+        for player in self.players:
+            self.start_players_turn(player.name)  
+      
     def startGame(self):
         num_of_players = self.get_num_of_players();
         self.ask_players_for_their_name(num_of_players)
         self.create_deck_of_cards()
         self.deal_cards(num_of_players)     
+        self.iterate_through_everyones_turn()
     
 
 
