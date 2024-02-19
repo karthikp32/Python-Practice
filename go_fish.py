@@ -28,6 +28,7 @@ class GoFish:
     #welcome()
     #ask_how_many_players_there()
     #ask_player_x_name(int playerNum)
+    #create_deck_of_cards()
     #deal_cards()
     #string ask_player_who_they_want_to_ask(String name)
     #string ask_player_what_card_they_want_to_ask_for(String name)
@@ -62,11 +63,23 @@ class GoFish:
             self.players.append(self.Player(i, player_name, [])) 
             print("Welcome " + self.players[i-1].name) 
 
+    def create_deck_of_cards(self):
+        suits = ["club", "diamond", "heart", "spade"]
+        ranks = ["king", "queen", "jack", "10", "9", "8", "7", "6", "5", "4", "3", "2", "ace"]
+        for suit in suits:
+            for rank in ranks:
+                self.cards_in_pool.append(rank + " of " + suit)
+        print(self.cards_in_pool)        
+            
+
+    def deal_cards(self, num_of_players):
+        return ''
+
     def startGame(self):
         num_of_players = self.get_num_of_players();
         print(num_of_players)
         self.ask_players_for_their_name(num_of_players)
-        # self.Player = self.Player(1, "Karthik", [])
+        self.create_deck_of_cards()
 
 
 if __name__== '__main__':
