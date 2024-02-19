@@ -1,3 +1,5 @@
+from random import randint
+
 class GoFish:
 
     #Role of computer and players
@@ -69,17 +71,37 @@ class GoFish:
         for suit in suits:
             for rank in ranks:
                 self.cards_in_pool.append(rank + " of " + suit)
-        print(self.cards_in_pool)        
             
+    def get_index_of_random_card(self):
+        return randint(0, len(self.cards_in_pool)-1)
+
 
     def deal_cards(self, num_of_players):
-        return ''
+        if int(num_of_players) == 2:
+            for player in range(int(num_of_players)):
+                for card in range(7):
+                    randomCardIdx = self.get_index_of_random_card()
+                    randomCard = self.cards_in_pool[randomCardIdx]
+                    self.players[player].cards.append(randomCard)
+                    self.cards_in_pool.pop(randomCardIdx)
+
+        else:
+            for player in range(int(num_of_players)):
+                for card in range(5):
+                    randomCardIdx = self.get_index_of_random_card()
+                    randomCard = self.cards_in_pool[randomCardIdx]
+                    self.players[player].cards.append(randomCard)
+                    self.cards_in_pool.pop(randomCardIdx)
+        for player in self.players:
+            print(player.name + " here are your cards: " + ','.join(player.cards))
+
 
     def startGame(self):
         num_of_players = self.get_num_of_players();
-        print(num_of_players)
         self.ask_players_for_their_name(num_of_players)
         self.create_deck_of_cards()
+        self.deal_cards(num_of_players)     
+    
 
 
 if __name__== '__main__':
